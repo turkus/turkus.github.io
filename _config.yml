@@ -1,0 +1,33 @@
+# Dependencies
+markdown:         redcarpet
+highlighter:      pygments
+
+# Permalinks
+permalink:        pretty
+relative_permalinks: true
+
+# Setup
+title:            turkus 
+tagline:          'site'
+description:      'Impossible is nothing'
+url:              http://turkus.github.io
+baseurl:          /
+
+author:
+  name:           'Wojciech Rola'
+  url:            https://turkus.github.io
+
+paginate:         5
+
+# Custom vars
+version:          2.1.0
+
+github:
+  repo:           https://github.com/turkus
+
+
+socials:
+  linkedin:       https://www.linkedin.com/in/wojciech-rola-709941105
+  stackoverflow:  https://stackoverflow.com/users/6734406/turkus
+  twitter:        https://twitter.com/WojciechRola
+  facebook:       https://www.facebook.com/turkus
