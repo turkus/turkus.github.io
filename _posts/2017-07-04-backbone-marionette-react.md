@@ -145,10 +145,10 @@ then an util to deal with:
 import dispatchUrl from './dispatcher'
 
 const showBackbonePage = (pathname) => {
-  let interval_id = setInterval(() => {
-    if (window.eventoryBackboneReady) {
+  let intervalId = setInterval(() => {
+    if (window.backboneAppReady) {
       dispatchUrl(pathname)
-      clearInterval(interval_id)
+      clearInterval(intervalId)
     }
   }, 250)
 }
@@ -234,11 +234,11 @@ class CoreLayout extends Component {
   }
 
   initLocationHandlers () {
-    let interval_id = setInterval(() => {
-      if (window.eventoryBackboneReady) {
+    let intervalId = setInterval(() => {
+      if (window.backboneAppReady) {
         const msgbus = Backbone.Wreqr.radio.channel('global')
         msgbus.reqres.setHandler('set:location', this.setLocation)
-        clearInterval(interval_id)
+        clearInterval(intervalId)
       }
     }, 250)
   }
