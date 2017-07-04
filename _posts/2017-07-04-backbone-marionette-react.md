@@ -9,7 +9,9 @@ How it took place?
 
 One day somebody gave me - a backend guy - an old school project written in Backbone with Marionette. At the beginning I was trying to get into, learn how it works etc, but after some while - in the time when React community was growing really fast - I said: That's it! Let's move to React.
 
-First was to convince my teammates to do it. Everybody wasn't sure if it's a good idea: "We have tons of code lines...". I agreed, because from the business point of view we couldn't rewrite whole Backbone app to React. We had to do it smoothly, piece by piece. Another thing was to decrease amount of data (`dist.js` - containing whole application logic) being sent to the client browser, 
+First was to convince my teammates to do it. Everybody wasn't sure if it's a good idea: "We have tons of code lines...", and I agreed. 
+
+From the business point of view we couldn't rewrite whole Backbone app to React. We had to do it smoothly, piece by piece. Another thing was to decrease amount of data (`dist.js` - containing whole application logic) being sent to the client browser, 
 
 Now I can say we did it! In production.
 
