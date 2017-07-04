@@ -9,7 +9,9 @@ How it took place?
 
 One day somebody gave me - a backend guy - an old school project written in Backbone with Marionette. At the beginning I was trying to get into, learn how it works etc, but after some while - in the time when React community was growing really fast - I said: That's it! Let's move to React.
 
-First was to convince my teammates to do it. Everybody wasn't sure if it's a good idea: "We have tons of code lines...". Now I can say we did it! In production.
+First was to convince my teammates to do it. Everybody wasn't sure if it's a good idea: "We have tons of code lines...". I agreed, because from the business point of view we couldn't rewrite whole Backbone app to React. We had to do it smoothly, piece by piece. Another thing was to decrease amount of data (`dist.js` - containing whole application logic) being sent to the client browser, 
+
+Now I can say we did it! In production.
 
 I was trying to find a good article about that case. Reading many meaningless articles and of course I found that:
 
@@ -266,7 +268,7 @@ What is `setLocation` and `set:location` handler for?
 ---
 
 Until everything works fine (Backbone and React apps), we need to implement one location handler on React app side and apply it to Backbone app, otherwise browser history won't work.
-In every place you navigate around Bacbone app, you have to use `msgbus` in this way:
+In every place you navigate around Backbone app, you have to use `msgbus` in this way:
 
 ~~~ javascript
 msgbus.reqres.request("set:location", {pathname: '/members'})
