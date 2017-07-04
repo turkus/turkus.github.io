@@ -7,32 +7,32 @@ last_modified_at: 2017-07-04T11:23:20+01:00
 How it took place?
 ---
 
-One day somebody gave me - a backend guy - an old school project written in Backbone with Marionette. At the beginning I was trying to get into, learn how it works etc, but after some while - in the time when React community was growing really fast - I said: That's it! Let's move to React.
+One day somebody gave me - a backend guy - an old school project written in Backbone with Marionette. At the beginning, I was trying to get into it, learn how it works etc, but after some while - at the time when React community was growing really fast - I said: That's it! Let's move to React.
 
-First was to convince my teammates to do it. Everybody wasn't sure if it's a good idea: "We have tons of code lines...", and I agreed. 
+The first thing was to convince my teammates to do it. Everybody wasn't sure if it was a good idea: "We have tons of code lines...", and I agreed. 
 
-From the business point of view we couldn't rewrite whole Backbone app to React. We had to do it smoothly, piece by piece. Another thing was to decrease amount of data (`dist.js` - containing whole application logic) being sent to the client browser. Now I can say that we did it! In production.
+From a business point of view, we couldn't rewrite the whole Backbone app to React. We had to do it smoothly, piece by piece. Another thing was to decrease the amount of data (`dist.js` - containing the whole application logic) being sent to the client's browser. Now I can say that we did it! In production.
 
-I was trying to find a good article about that case. Reading many meaningless articles and of course I found that:
+I was trying to find a good article about this case. While reading many meaningless articles I came across this: 
 
 [http://jgaskins.org/blog/2015/02/06/gentle-migration-from-marionette-to-react](http://jgaskins.org/blog/2015/02/06/gentle-migration-from-marionette-to-react)
 
-And that's really cool, anyway thanks guys! But... we decided to go a little bit further.
+And that's really cool, anyway thanks, guys! But... we decided to go a little bit further.
 
-Imagine that you're not using gulp, Backbone with Marionette by building big `dist.js`, but you do it using webpack and React.
+Imagine that you're not using gulp, Backbone with Marionette and you don't build big `dist.js`, but you use webpack bundle loader and React.
 
-How could that possible?
+How could that be possible?
 
 Well you have to mix it. Create a connection between React and our lovely Backbone app. Let's say: create a hybrid.
 
 Recipe
 ---
 
-I need you to focus. I won't sell here the boilerplate, but I will try to explain HOWTO in really easy and straight way.
+I need you to focus. I won't sell a boilerplate here, but I will try to explain HOW TO in a really easy and straightforward way.
 
-First we need to deal with webpack and install base React sources + React Router. We can even use simple boilerplate (we used React, React Router and Redux). Then put everything in the same static directory next to Backbone app. When we have it and by running `npm start` we see simple React app on [http://localhost:8080](http://localhost:8080) we can move to step two.
+First, we need to deal with webpack and install base React sources + React Router. We can even use simple boilerplate (we used React, React Router and Redux). Then, put everything in the same static directory next to the Backbone app. When we have it and by running `npm start` we will see a simple React app on [http://localhost:8080](http://localhost:8080), we can move to step two.
 
-In that step we look into Backbone app, find (or define) place like this:
+In that step we look into the Backbone app, find (or define) a place like this:
 
 ~~~ javascript
 var App = new Marionette.Application({
@@ -42,7 +42,7 @@ var App = new Marionette.Application({
 });
 ~~~
 
-and put there a global variable, let's call it `backboneAppReady` and set it to `true`:
+and put a global variable there, let's call it `backboneAppReady` and set it to `true`:
 
 ~~~ javascript
 var App = new Marionette.Application({
@@ -53,13 +53,13 @@ var App = new Marionette.Application({
 });
 ~~~
 
-That will tell React that Backbone application has been started and we can talk with. How? Let's go to the next step.
+That will tell the React that the Backbone application has been started and we can talk with it. How? Let's go to the next step.
 
-We have something like Backbone.Wreqr ([https://github.com/marionettejs/backbone.wreqr](https://github.com/marionettejs/backbone.wreqr)). Now it's depreciated, but which old project isn't? :) After installing it we can use radio channel which is the clue.  
+We have something like Backbone.Wreqr ([https://github.com/marionettejs/backbone.wreqr](https://github.com/marionettejs/backbone.wreqr)). Now it's depreciated, but which old project isn't? :) After installing it we can use radio channel, which is the key element.
 
-Of course if you're up to date with Marionette, you can use in Marionette v3.x.x built-in radio option with channels ([https://marionettejs.com/docs/v3.0.0/backbone.radio.html#channel](https://marionettejs.com/docs/v3.0.0/backbone.radio.html#channel))
+Of course if you're up-to-date with Marionette, you can use in Marionette v3.x.x built-in radio option with channels ([https://marionettejs.com/docs/v3.0.0/backbone.radio.html#channel](https://marionettejs.com/docs/v3.0.0/backbone.radio.html#channel))
 
-Now, I'm sure you have implemented msgbus as a module in some kind of this way (if not I suggest to do that):
+Now, I'm sure you have implemented msgbus, as a module, in the following way (if not I suggest to do that):
 
 ~~~ javascript
 // static/backboneapp/utils/msgbus.js
@@ -75,7 +75,7 @@ define(["backbone", "backbone.wreqr"], function(Backbone) {
 });
 ~~~
 
-the only one thing we should change is to use the power of channels! So change to this:
+the only thing we should change here is to use the power of channels! So change to this:
 
 ~~~ javascript
 // static/backboneapp/utils/msgbus.js
@@ -139,7 +139,7 @@ const dispatchUrl = (path) => {
 export default dispatchUrl
 ~~~
 
-then an util to deal with:
+then a util to deal with:
 
 ~~~ javascript
 // static/reactapp/routes/Backbone/utils.js
@@ -158,7 +158,7 @@ const showBackbonePage = (pathname) => {
 export default showBackbonePage
 ~~~
 
-and finally React `NotFound.js` view implementation:
+and finally the React `NotFound.js` view implementation:
 
 ~~~ javascript
 // static/reactapp/routes/NotFound/components/NotFound/NotFound.js
@@ -186,6 +186,11 @@ class NotFound extends Component {
 
   componentDidUpdate () {
     showBackbonePage(this.props.location.pathname)
+  }
+
+  componentWillUnmount () {    
+    const msgbus = Backbone.Wreqr.radio.channel('global') 
+    msgbus.reqres.request('clear:backbone:page') 
   }
 
   shouldComponentUpdate (nextProps) {
@@ -267,7 +272,7 @@ export default CoreLayout
 What is `setLocation` and `set:location` handler for?
 ---
 
-Until everything works fine (Backbone and React apps), we need to implement one location handler on React app side and apply it to Backbone app, otherwise browser history won't work.
+Until everything works fine (Backbone and React apps), we need to implement one location handler on the React app side and apply it to Backbone app, otherwise the browser history won't work.
 In every place you navigate around Backbone app, you have to use `msgbus` in this way:
 
 ~~~ javascript
@@ -285,10 +290,25 @@ class Router extends Marionette.AppRouter
 
 and its usage.
 
+What is `clear:backbone:page` handler for?
+---
+
+It's made to clear main region content in case of changing the Backbone's view to the React's view. You define it in the Backbone app. Here is the example implementation:
+
+~~~ javascript
+msgbus.reqres.setHandler("clear:backbone:page", function() {
+  var mainRegion;
+  mainRegion = App.getRegion("mainRegion");
+  mainRegion.currentView.destroy();
+});
+~~~
+
+`mainRegion` is defined by the `#main-region .core-layout__backbone` selector.
+
 What about `index.html`?
 ---
 
-In `index.html` you have to put Backbone's root div into React's which is recommended to mix views (`<div className='core-layout__backbone' />` in `CoreLayout.js` in code example above) and of course add javascript dists of both apps.
+In `index.html` you have to put Backbone's root div into React's root div which is recommended to mix views (`<div className='core-layout__backbone' />` in `CoreLayout.js` in code example above) and of course add javascript dists of both apps.
 
 What about template tags which backend renders?<br>
 We used [https://www.npmjs.com/package/ejs](https://www.npmjs.com/package/ejs) to escape them.
@@ -296,11 +316,12 @@ We used [https://www.npmjs.com/package/ejs](https://www.npmjs.com/package/ejs) t
 How it works?
 ---
 
-Main assumption was to pass the whole traffic through the React Router. So we set `NotFound.js` route as in the example above and when applications starts, it searches route in React and if doesn't find then goes to Backbone app.
+The main assumption was to pass the whole traffic through the React Router. So we set `NotFound.js` route as in the example above and when applications starts, it searches route in React and if doesn't find one then it goes to Backbone app.
 
 
 Hope that helps!
 
 Big thanks to
 ---
-I'd like to thank my mate Dawid who went with me through all this stuff that we've got this done!
+
+I'd like to thank my mate Dawid who went with me through all this stuff and we've got this done!
