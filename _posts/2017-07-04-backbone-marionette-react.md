@@ -95,7 +95,7 @@ Now you created a global channel to talk through.
 If we have it, then we can move to React app. First, let's create url dispatcher for our Backbone views:
 
 ~~~ javascript
-// static/react/routes/Backbone/dispatcher.js
+// static/reactapp/routes/Backbone/dispatcher.js
 
 const showHome = (msgbus, matches) => {
   msgbus.reqres.request('show:home')
@@ -140,7 +140,7 @@ export default dispatchUrl
 then an util to deal with:
 
 ~~~ javascript
-// static/react/routes/Backbone/utils.js
+// static/reactapp/routes/Backbone/utils.js
 
 import dispatchUrl from './dispatcher'
 
@@ -159,7 +159,7 @@ export default showBackbonePage
 and finally React `NotFound.js` view implementation:
 
 ~~~ javascript
-// static/react/routes/NotFound/components/NotFound/NotFound.js
+// static/reactapp/routes/NotFound/components/NotFound/NotFound.js
 
 import { Component } from 'react'
 import PropTypes from 'prop-types'
