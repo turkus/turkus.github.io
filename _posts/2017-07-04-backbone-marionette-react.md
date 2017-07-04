@@ -307,7 +307,9 @@ How to organize the main regions of both apps?
 ---
 
 You have to put Backbone's root div into React's root div which is recommended to mix views.
+
 React's root div is defined by the `#main-region` selector (see the `index.html` example below).
+
 Backbone's root div (`mainRegion` - from the previous section) is defined by the `#main-region .core-layout__backbone` selector (`<div className='core-layout__backbone' />` in `CoreLayout.js` in code example above).
 
 `index.html` to complete the view
