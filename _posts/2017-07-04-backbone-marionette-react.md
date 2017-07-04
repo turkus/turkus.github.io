@@ -330,7 +330,7 @@ Backbone's root div (`mainRegion` - from the previous section) is defined by the
 </html>
 ~~~
 
-In case of the template tags which backend renders, you can use [https://www.npmjs.com/package/ejs](https://www.npmjs.com/package/ejs) to escape them.
+In case of a need to escape the template tags which backend renders, you can use [https://www.npmjs.com/package/ejs](https://www.npmjs.com/package/ejs).
 
 How it works?
 ---
