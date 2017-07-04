@@ -303,15 +303,32 @@ msgbus.reqres.setHandler("clear:backbone:page", function() {
 });
 ~~~
 
-`mainRegion` is defined by the `#main-region .core-layout__backbone` selector.
-
-What about `index.html`?
+How to organize the main regions of both apps?
 ---
 
-In `index.html` you have to put Backbone's root div into React's root div which is recommended to mix views (`<div className='core-layout__backbone' />` in `CoreLayout.js` in code example above) and of course add javascript dists of both apps.
+You have to put Backbone's root div into React's root div which is recommended to mix views.
+React's root div is defined by the `#main-region` selector (see the `index.html` example below).
+Backbone's root div (`mainRegion` - from the previous section) is defined by the `#main-region .core-layout__backbone` selector (`<div className='core-layout__backbone' />` in `CoreLayout.js` in code example above).
 
-What about template tags which backend renders?<br>
-We used [https://www.npmjs.com/package/ejs](https://www.npmjs.com/package/ejs) to escape them.
+`index.html` to complete the view
+---
+
+~~~ html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Backbone (Marionette) to React</title>
+    <!-- React dist.js -->
+    <!-- Backbone dist.js -->
+  </head>
+  <body>
+    <div id="main-region"></div>
+  </body>
+</html>
+~~~
+
+In case of the template tags which backend renders, you can use [https://www.npmjs.com/package/ejs](https://www.npmjs.com/package/ejs) to escape them.
 
 How it works?
 ---
