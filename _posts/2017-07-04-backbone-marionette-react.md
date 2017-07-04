@@ -11,9 +11,7 @@ One day somebody gave me - a backend guy - an old school project written in Back
 
 First was to convince my teammates to do it. Everybody wasn't sure if it's a good idea: "We have tons of code lines...", and I agreed. 
 
-From the business point of view we couldn't rewrite whole Backbone app to React. We had to do it smoothly, piece by piece. Another thing was to decrease amount of data (`dist.js` - containing whole application logic) being sent to the client browser, 
-
-Now I can say we did it! In production.
+From the business point of view we couldn't rewrite whole Backbone app to React. We had to do it smoothly, piece by piece. Another thing was to decrease amount of data (`dist.js` - containing whole application logic) being sent to the client browser. Now I can say that we did it! In production.
 
 I was trying to find a good article about that case. Reading many meaningless articles and of course I found that:
 
