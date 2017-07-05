@@ -147,12 +147,12 @@ then a util to deal with:
 import dispatchUrl from './dispatcher'
 
 const showBackbonePage = (pathname) => {
-  let intervalId = setInterval(() => {
-    if (window.backboneAppReady) {
-      dispatchUrl(pathname)
-      clearInterval(intervalId)
-    }
-  }, 250)
+  if (!window.eventoryBackboneReady) {
+    return setTimeout(() => {
+      showBackbonePage(pathname)
+    }, 250)
+  }
+  dispatchUrl(pathname)
 }
 
 export default showBackbonePage
@@ -241,13 +241,13 @@ class CoreLayout extends Component {
   }
 
   initLocationHandlers () {
-    let intervalId = setInterval(() => {
-      if (window.backboneAppReady) {
-        const msgbus = Backbone.Wreqr.radio.channel('global')
-        msgbus.reqres.setHandler('set:location', this.setLocation)
-        clearInterval(intervalId)
-      }
-    }, 250)
+    if (!window.eventoryBackboneReady) {
+      return setTimeout(() => {
+        this.initLocationHandlers()
+      }, 250)
+    }
+    const msgbus = Backbone.Wreqr.radio.channel('global')
+    msgbus.reqres.setHandler('set:location', this.setLocation)
   }
 
   render () {
@@ -293,7 +293,7 @@ and its usage.
 What is `clear:backbone:page` handler for?
 ---
 
-It's made to clear main region content in case of changing the Backbone's view to the React's view. You define it in the Backbone app. Here is the example implementation:
+It's made to clear main region content in case of changing the Backbone's view to the React's view. It's called every time a `NotFound.js` component unmounts. You define it in the Backbone app. Here is the example implementation:
 
 ~~~ javascript
 msgbus.reqres.setHandler("clear:backbone:page", function() {
