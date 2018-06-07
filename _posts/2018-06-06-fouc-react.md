@@ -1,6 +1,6 @@
 ---
 layout: post
-title: FOUC issue in React
+title: FOUC issue in React [SOLVED!]
 ---
 
 FOUC
